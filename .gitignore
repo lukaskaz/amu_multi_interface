@@ -1,6 +1,7 @@
 **/out/
 **/obj/
 **/lib/
+!**/pro/lib/
 **/moc/
 **/.settings/
 **/.project
