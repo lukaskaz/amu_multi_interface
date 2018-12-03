@@ -1,5 +1,5 @@
 #Output files
-APP_NAME=amu-if
+PROJ_NAME=amu-if
 
 #======================================================================#
 #Directories
@@ -63,8 +63,8 @@ SRC_GROUP=$(addprefix $(SRC_DIR),$(SRC))
 OBJ_GROUP=$(addprefix $(OBJ_DIR),$(OBJ))
 
 #prepare outputs
-EXEC_FILE=$(EXEC_DIR)$(APP_NAME)
-MAP_FILE=$(MAP_DIR)$(APP_NAME).map
+EXEC_FILE=$(EXEC_DIR)$(PROJ_NAME)
+MAP_FILE=$(MAP_DIR)$(PROJ_NAME).map
 
 #======================================================================#
 #Flags
@@ -147,7 +147,7 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.cpp $(INC_DIR)%.hpp $(DEPS_LIB)
 
 #Make clean
 clean: deps-clean
-	@echo "Cleaning the project..."
+	@echo "Cleaning the project '$(PROJ_NAME)'"
 	rm -rf $(MAP_DIR)* $(EXEC_DIR)* $(OBJ_DIR)*
 
 #======================================================================
