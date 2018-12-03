@@ -1,4 +1,9 @@
-*/out/
-*/obj/
-*/lib/
-*/moc/
+**/out/
+**/obj/
+**/lib/
+**/moc/
+**/.settings/
+**/.project
+**/.cproject
+**/qmake.stash
+
