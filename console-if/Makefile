@@ -1,6 +1,7 @@
 #Output files
 #LIB_NAME=libfcgi.a
-LIB_NAME=libconsole-if.so
+DEP_NAME=console-if
+LIB_NAME=lib$(DEP_NAME).so
 LIB_VER1=1
 LIB_VER2=0
 LIB_VER3=0
@@ -110,7 +111,7 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.cpp $(INC_DIR)%.hpp
 
 #Make clean
 clean:
-	@echo "Cleaning this dependency..."
+	@echo "Cleaning this dependency '$(DEP_NAME)'"
 	rm -rf $(MAP_DIR)* $(LIB_DIR)* $(OBJ_DIR)*
 
 #======================================================================

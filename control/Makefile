@@ -42,6 +42,9 @@ DEPS_SRC:=$(wildcard $(DEPS_SRC))
 DEPS_INC:=$(addsuffix *.hpp,$(DEPS_INC_DIR))
 DEPS_INC:=$(wildcard $(DEPS_INC))
 
+DEPS_CMD=$(subst deps-,,$(MAKECMDGOALS))
+DEPS_RULE=deps-$(DEPS_CMD)
+
 #======================================================================#
 #Libraries
 LIBS+=pthread
@@ -107,30 +110,14 @@ exec-release: $(MAP_FILE)
 exec-debug: CFLAGS+=-O0 -g3
 exec-debug: $(MAP_FILE)
 
-deps-build: DEP_MAKE=$(MAKE) --directory=$@ build
-#deps-build: MAKEFLAGS=--print-directory
-deps-build: $(DEPS_REF)
-
-deps-release: DEP_MAKE=$(MAKE) --directory=$@ release
-#deps-release: MAKEFLAGS=--print-directory
-deps-release: $(DEPS_REF)
-
-deps-debug: DEP_MAKE=$(MAKE) --directory=$@ debug
-#deps-debug: MAKEFLAGS=--print-directory
-deps-debug: $(DEPS_REF)
-
-deps-clean: DEP_MAKE=$(MAKE) --directory=$@ clean
-#deps-clean: MAKEFLAGS=--print-directory
-deps-clean: $(DEPS_REF)
-
-deps-rebuild: DEP_MAKE=$(MAKE) --directory=$@ rebuild
-#deps-rebuild: MAKEFLAGS=--print-directory
-deps-rebuild: $(DEPS_REF)
+$(DEPS_RULE): DEP_MAKE=$(MAKE) --directory=$@ $(DEPS_CMD)
+#$(DEPS_RULE): MAKEFLAGS=--print-directory
+$(DEPS_RULE): $(DEPS_REF)
 
 
 $(DEPS_REF):
 	@echo ">> Checking dependencies for '$(@F)'"
-	@$(DEP_MAKE)
+	@+$(DEP_MAKE)
 
 $(MAP_FILE): $(EXEC_FILE)
 	@echo "Creating map file '$(@F)'"
@@ -152,4 +139,3 @@ clean: deps-clean
 
 #======================================================================
 .PHONY: rebuild release debug clean $(DEPS_REF)
-
